@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Student Registration</h2>
+        <input type="text" id="full_name" placeholder="Full Name" required>
+        <input type="number" id="age" placeholder="Age" required>
+        <input type="text" id="school_name" placeholder="School Name" required>
+        <input type="text" id="fathers_name" placeholder="Father's Name" required>
+        <button onclick="submitData()">Submit</button>
+    </div>
+
+    <script>
+        function submitData() {
+            const data = {
+                full_name: document.getElementById('full_name').value,
+                age: document.getElementById('age').value,
+                school_name: document.getElementById('school_name').value,
+                fathers_name: document.getElementById('fathers_name').value
+            };
+
+            // Validate input fields
+            if (!data.full_name || !data.age || !data.school_name || !data.fathers_name) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            // Send data back to the Telegram bot
+            if (window.Telegram.WebApp) {
+                Telegram.WebApp.sendData(JSON.stringify(data));
+            } else {
+                alert('Telegram WebApp not initialized.');
+            }
+        }
+    </script>
+</body>
+</html>
